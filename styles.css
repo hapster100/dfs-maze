@@ -1,0 +1,44 @@
+.table-row {
+    display: flex;
+}
+
+.cell {
+    transition: all 0.1s;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+}
+
+.top-border {
+    border-top: 4px solid black;
+}
+
+.bottom-border {
+    border-bottom: 4px solid black;
+}
+
+.left-border {
+    border-left: 4px solid black;
+}
+
+.right-border {
+    border-right: 4px solid black;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
