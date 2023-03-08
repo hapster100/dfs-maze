@@ -195,7 +195,7 @@ class LabCreate {
 const root = document.getElementById('root')
 const h = document.body.clientHeight
 const w = document.body.clientWidth
-const table = new Mase(Math.ceil(h / 24), Math.ceil(w / 24))
+const table = new Maze(Math.ceil(h / 24), Math.ceil(w / 24))
 
 
 const creater = new MazeCreate(table, 0)
