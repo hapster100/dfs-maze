@@ -1,42 +1,72 @@
+:root {
+    --border: 2px
+}
+
 .table-row {
     display: flex;
 }
 
 .cell {
-    transition: all 0.1s;
-    border-radius: 4px;
+    border-radius: var(--border);
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 24px;
-    width: 24px;
 }
 
 .top-border {
-    border-top: 4px solid black;
+    border-top: var(--border) solid black;
 }
 
 .bottom-border {
-    border-bottom: 4px solid black;
+    border-bottom: var(--border) solid black;
 }
 
 .left-border {
-    border-left: 4px solid black;
+    border-left: var(--border) solid black;
 }
 
 .right-border {
-    border-right: 4px solid black;
+    border-right: var(--border) solid black;
+}
+
+.info {
+    font-size: 20px;
+    width: 70%;
+    text-align: center;
+    margin-top: 20px;
 }
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
+    font-family: monospace;
+    background-color: white;
     width: 100vw;
     height: 100vh;
     margin: 0;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.container {
+    background-color: black;
+    width: calc(min(100vh, 100vw)*0.9);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (min-width: 800px) {
+    body {
+        flex-direction: row;
+    }
+
+    .info {
+        margin-top: 0;
+        margin-left: 20px;
+    }
 }
 
 * {

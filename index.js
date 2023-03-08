@@ -1,5 +1,5 @@
 class Cell {
-    constructor() {
+    constructor(size) {
         this._borders = {
             top: false,
             bottom: false,
@@ -9,9 +9,11 @@ class Cell {
         this._text = ''
 
         const el = document.createElement('div')
-        this._el = el
-
         el.classList.add('cell')
+        el.style.height = size + 'px'
+        el.style.width = size + 'px'
+        this._el = el
+        
         this.color = 'black'
         this.borders = {
             top: false,
@@ -49,9 +51,9 @@ class Cell {
 }
 
 class Maze {
-    constructor(n, m) {
+    constructor(n, m, cellSize) {
         this._size = [n, m]
-        this._cells = new Array(n * m).fill(0).map(_ => new Cell())
+        this._cells = new Array(n * m).fill(0).map(_ => new Cell(cellSize))
         const el = document.createElement('div')
         el.classList.add('table')
         this._el = el
@@ -108,7 +110,7 @@ class Maze {
     }
 }
 
-class LabCreate {
+class MazeCreate {
     constructor(table, timeout) {
         this.table = table
         this.timeout = timeout
@@ -123,7 +125,6 @@ class LabCreate {
     }
 
     emit(type, payload) {
-        console.log(type, payload)
         if(this.listeners[type]) {
             for(let cb of this.listeners[type]) {
                 cb(payload)
@@ -190,15 +191,18 @@ class LabCreate {
     }
 }
 
-
-
 const root = document.getElementById('root')
-const h = document.body.clientHeight
-const w = document.body.clientWidth
-const table = new Maze(Math.ceil(h / 24), Math.ceil(w / 24))
+const h = root.clientHeight
+const w = root.clientWidth
 
+const size = Math.max((Math.min(h, w) - 8) / 25, 8)
+const m = Math.floor(h/size)
+const n = Math.floor(w/size)
 
-const creater = new MazeCreate(table, 0)
+const table = new Maze(m, n, size)
+
+const creater = new MazeCreate(table, 10)
+
 creater.addListener('out', function(curr) {
     table.getCell(curr[0], curr[1]).color = 'yellow'
 })
@@ -206,6 +210,7 @@ creater.addListener('out', function(curr) {
 creater.addListener('way', function({from, to}) {
     table.removeBorder(from, to)
 })
+
 creater.run()
 
 root.appendChild(table._el)
